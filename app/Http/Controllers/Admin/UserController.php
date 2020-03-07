@@ -15,20 +15,20 @@ use DB;
 class UserController extends Controller
 {
     public function __construct(){
-
+      $this->middleware('auth:admin');
     }
 
     public function index(){
 
     }
-    // 
+    //
     public function create(){
     	$allRole=UserRole::get();
     	return view('admin.user.add',compact('allRole'));
     }
     //create
     public function store(Request $request){
-    	
+
 
     	if($request->password == $request->password_confirmation){
 	    	$insert=User::insertGetId([
@@ -41,7 +41,7 @@ class UserController extends Controller
 	    		'user_image' => '',
 	    		'created_at'=>Carbon::now()->toDatetimeString()
 
-	    	]);	
+	    	]);
 
 	    	if($request->has('user_image')){
 	    		$image=$request->file('user_image');
@@ -75,7 +75,7 @@ class UserController extends Controller
 	            return Redirect()->back()->with($notification);
     	}
 
-    	
+
     }
 
 
@@ -97,7 +97,7 @@ class UserController extends Controller
     		'updated_at'=> Carbon::now()->toDatetimeString(),
 
     	]);
-    	
+
     	if($delete){
             $notification=array(
                 'messege'=>'User deleted successfully',
@@ -143,7 +143,7 @@ class UserController extends Controller
             ]);
 
     	}
-    	
+
     	if($update){
             $notification=array(
                 'messege'=>'User updated successfully',
@@ -158,5 +158,9 @@ class UserController extends Controller
             return Redirect()->back()->with($notification);
          }
     }
-}
 
+    public function dashboard()
+    {
+      return "ok";
+    }
+}

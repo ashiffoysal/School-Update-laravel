@@ -31,3 +31,8 @@ Route::get(md5('admin/user/all'), 'Admin\UserController@allUser')->name('admin.u
 Route::get('admin/user/delete/{id}', 'Admin\UserController@delete');
 Route::get('admin/user/edit/{id}', 'Admin\UserController@edit');
 Route::post(md5('admin/user/update'), 'Admin\UserController@update')->name('admin.user.update');
+
+Route::get('admin', 'Admin\UserController@dashboard')->name('admin.dashboard');
+Route::get('admin/register', 'Admin\AsifController@register')->name('admin.register');
+Route::get('admin/login', 'Admin\AsifController@login')->name('admin.login');
+Route::get('home/dashboard', 'Admin\AsifController@homedash')->name('user.dashboard');
